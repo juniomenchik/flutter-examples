@@ -1,4 +1,6 @@
-// ignore_for_file: library_private_types_in_public_api, unused_local_variable
+// ignore_for_file: library_private_types_in_public_api, unused_local_variable, prefer_final_fields, unused_field, unnecessary_new
+
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -24,8 +26,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  int _numAleatorio = 0;
+
+  void onPressed() {
+    setState(() {
+      _numAleatorio = new Random().nextInt(5);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,65 +44,11 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: TextField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    labelText: 'Email ChongDong',
-                    labelStyle: TextStyle(
-                      color: Colors.grey[700],
-                      fontWeight: FontWeight.bold,
-                    ),
-                    focusedBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(
-                      color: Colors.grey[700],
-                      fontWeight: FontWeight.bold,
-                    ),
-                    focusedBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: () {
-                  String email = emailController.text.trim();
-                  String password = passwordController.text.trim();
-                  // Validate the login credentials here
-                },
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey[700],
-                    foregroundColor: Colors.white),
-                child: const Text('Login'),
-              ),
-              const SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  'Forgot Password?',
-                  style: TextStyle(
-                    color: Colors.grey[700],
-                  ),
-                ),
-              ),
+              Text('Pressione o botao para gerar um numero aleatorio'),
+              Text('$_numAleatorio'),
+              FloatingActionButton(onPressed: onPressed),
             ],
-          ),
+          ), 
         ),
       ),
     );
